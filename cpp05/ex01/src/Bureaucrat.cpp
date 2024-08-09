@@ -67,3 +67,14 @@ std::ostream &operator<<(std::ostream &out, Bureaucrat const &src)
     out << src.getName() << ", bureaucrat grade " << src.getGrade();
     return out;
 }
+
+void Bureaucrat::signForm(Form &form)
+{
+    if (_grade > form.getRequireGrade())
+    {
+        std::cout << _name << " cannot sign " << form.getName() << " because grade is too low" << std::endl;
+        return;
+    }
+    form.beSigned(*this);
+    std::cout << _name << " signs " << form.getName() << std::endl;
+}
