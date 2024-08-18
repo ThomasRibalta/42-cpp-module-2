@@ -8,7 +8,7 @@ OBJ= $(patsubst %.cpp, %.o,$(SRC))
 all:
 	make $(NAME)
 
-%.o: %.c
+%.o: %.cpp
 	c++ -c $(FLAGS) -g -o $@ $<
 
 $(NAME): $(OBJ)

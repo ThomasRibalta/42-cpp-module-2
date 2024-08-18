@@ -1,8 +1,8 @@
-NAME = exception
+NAME = PmergeMe
 CC = c++
 RM = rm -f
 FLAGS = -Wall -Wextra -Werror -std=c++98
-SRC = src/main.cpp src/Bureaucrat.cpp 
+SRC = src/main.cpp src/PmergeMe.cpp
 OBJ= $(patsubst %.cpp, %.o,$(SRC))
 
 all:
