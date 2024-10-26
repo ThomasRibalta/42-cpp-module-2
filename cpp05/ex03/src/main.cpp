@@ -1,97 +1,95 @@
+#include <iostream>
 #include "header/Bureaucrat.hpp"
-#include "header/AForm.hpp"
-#include "header/PresidentialPardonForm.hpp"
-#include "header/RobotomyRequestForm.hpp"
 #include "header/ShrubberyCreationForm.hpp"
+#include "header/RobotomyRequestForm.hpp"
+#include "header/PresidentialPardonForm.hpp"
 #include "header/Intern.hpp"
-
 
 int main()
 {
-    std::cout << "Test 1: Create a Bureaucrat with a grade of 150" << std::endl;
     try
     {
-        Bureaucrat b2("Bureaucrat2", 151);       
+        Bureaucrat JohnSmith("John Smith", 42);
+        Bureaucrat HighRank("High Rank", 1);
+        Bureaucrat LowRank("Low Rank", 150);
+        Intern someIntern;
+
+        // Intern creation tests
+        AForm *shrubberyForm = someIntern.makeForm("shrubbery creation", "Form_24601");
+        AForm *robotomyForm = someIntern.makeForm("robotomy request", "Captain Picard");
+        AForm *pardonForm = someIntern.makeForm("presidential pardon", "Richard Nixon");
+        // AForm *unknownForm = someIntern.makeForm("Unform", "John Smith");
+
+        // Form tests
+        std::cout << "\n----- Testing ShrubberyCreationForm -----\n"
+                  << std::endl;
+        if (shrubberyForm)
+        {
+            try
+            {
+                std::cout << "Attempting to sign ShrubberyCreationForm with HighRank..." << std::endl;
+                shrubberyForm->beSigned(HighRank);
+                std::cout << *shrubberyForm << std::endl;
+                std::cout << "Attempting to execute ShrubberyCreationForm with HighRank..." << std::endl;
+                shrubberyForm->execute(HighRank);
+            }
+            catch (std::exception &e)
+            {
+                std::cerr << "Exception caught: " << e.what() << std::endl;
+            }
+            delete shrubberyForm;
+        }
+        std::cout << "\n----- Testing RobotomyRequestForm -----\n"
+                  << std::endl;
+        if (robotomyForm)
+        {
+            try
+            {
+                std::cout << "Attempting to sign RobotomyRequestForm with HighRank..." << std::endl;
+                robotomyForm->beSigned(HighRank);
+                std::cout << *robotomyForm << std::endl;
+                std::cout << "Attempting to execute RobotomyRequestForm with HighRank..." << std::endl;
+                robotomyForm->execute(HighRank);
+            }
+            catch (std::exception &e)
+            {
+                std::cerr << "Exception caught: " << e.what() << std::endl;
+            }
+            delete robotomyForm;
+        }
+        std::cout << "\n----- Testing PresidentialPardonForm -----\n"
+                  << std::endl;
+        if (pardonForm)
+        {
+            try
+            {
+                std::cout << "Attempting to sign PresidentialPardonForm with HighRank..." << std::endl;
+                pardonForm->beSigned(HighRank);
+                std::cout << *pardonForm << std::endl;
+                std::cout << "Attempting to execute PresidentialPardonForm with HighRank..." << std::endl;
+                pardonForm->execute(HighRank);
+            }
+            catch (std::exception &e)
+            {
+                std::cerr << "Exception caught: " << e.what() << std::endl;
+            }
+            delete pardonForm;
+        }
+        std::cout << "\n----- Testing unknown form -----\n"
+                  << std::endl;
+        // if (unknownForm)
+        // {
+        //     std::cerr << "Error: unknown form should not have been created." << std::endl;
+        //     delete unknownForm;
+        // }
+        // else
+        // {
+        //     std::cout << "Unknown form creation correctly handled." << std::endl;
+        // }
     }
     catch (std::exception &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cerr << "Exception caught: " << e.what() << std::endl;
     }
-    std::cout << "Test 2: Create a Bureaucrat with a grade of 0" << std::endl;
-    try
-    {
-        Bureaucrat b1("Bureaucrat1", 0);       
-    }
-    catch (std::exception &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    std::cout << "Test 3: Create a Bureaucrat with a grade of 1" << std::endl;
-    try
-    {
-        Bureaucrat b3("Bureaucrat3", 1);       
-    }
-    catch (std::exception &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    std::cout << "Test 4: Create a Bureaucrat with a grade of 150" << std::endl;
-    try
-    {
-        Bureaucrat b4("Bureaucrat4", 150);       
-    }
-    catch (std::exception &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    std::cout << "Test 5: Create a Bureaucrat and form custom" << std::endl;
-    try
-    {
-        Bureaucrat b5("Bureaucrat5", 5);
-        PresidentialPardonForm f1("target1");
-        b5.signForm(f1);
-        f1.execute(b5);
-    }
-    catch (std::exception &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    std::cout << "Test 6: Create a Bureaucrat and form custom" << std::endl;
-    try
-    {
-        Bureaucrat b6("Bureaucrat6", 43);  
-        RobotomyRequestForm f2("target2");
-        b6.signForm(f2);
-        f2.execute(b6);
-    }
-    catch (std::exception &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    std::cout << "Test 7: Create a Bureaucrat and form custom" << std::endl;
-    try
-    {
-        Bureaucrat b7("Bureaucrat7", 130);  
-        ShrubberyCreationForm f3("target3");
-        b7.signForm(f3);
-        f3.execute(b7);
-    }
-    catch (std::exception &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    std::cout << "Test 8: Create a Bureaucrat with intern" << std::endl;
-    try
-    {
-        Intern intern;
-        AForm *f4 = intern.makeForm("robotomy request", "target4");
-        Bureaucrat b8("Bureaucrat8", 72);
-        b8.signForm(*f4);
-        f4->execute(b8);
-    }
-    catch (std::exception &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
+    return 0;
 }
-        
