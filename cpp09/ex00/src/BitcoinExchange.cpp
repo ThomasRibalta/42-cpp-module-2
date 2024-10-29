@@ -53,6 +53,11 @@ void BitcoinExchange::compare_data(std::string filename)
   {
     std::string line;
     getline(file, line);
+    if (line != "date | value")
+    {
+      std::cout << "Error: bad input => " << line << std::endl;
+      return;
+    }
     while (getline(file, line))
     {
       size_t separator_pos = line.find(" | ");
