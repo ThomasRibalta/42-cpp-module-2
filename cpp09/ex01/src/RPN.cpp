@@ -1,15 +1,30 @@
 #include "header/RPN.hpp"
 
-RPN::RPN(void){}
+RPN::RPN(void) {}
 
-RPN::~RPN(void){}
+RPN::~RPN(void) {}
+
+RPN::RPN(const RPN &other)
+{
+    *this = other;
+}
+
+RPN &RPN::operator=(const RPN &other)
+{
+    if (this != &other)
+    {
+        this->_stack = other._stack;
+    }
+    return *this;
+}
 
 int RPN::calculate_result(std::string expression)
 {
     std::istringstream iss(expression);
     std::string token;
 
-    while (iss >> token) {
+    while (iss >> token)
+    {
         if (isdigit(token[0]))
         {
             this->_stack.push(std::stoi(token));
@@ -29,7 +44,7 @@ int RPN::calculate_result(std::string expression)
             {
                 this->_stack.push(a + b);
             }
-            else if (token == "-") 
+            else if (token == "-")
             {
                 this->_stack.push(a - b);
             }
@@ -52,7 +67,8 @@ int RPN::calculate_result(std::string expression)
         }
     }
 
-    if (this->_stack.size() != 1) {
+    if (this->_stack.size() != 1)
+    {
         throw std::runtime_error("Error: malformed expression.");
     }
 

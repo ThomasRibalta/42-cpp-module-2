@@ -1,5 +1,5 @@
 #ifndef RPN_HPP
-# define RPN_HPP
+#define RPN_HPP
 
 #include <iostream>
 #include <stack>
@@ -8,13 +8,15 @@
 
 class RPN
 {
-  private:
-    std::stack<int> _stack;
+private:
+  std::stack<int> _stack;
 
-  public:
-    RPN(void);
-    ~RPN(void);
-    int calculate_result(std::string);
+public:
+  RPN(void);
+  ~RPN(void);
+  RPN(const RPN &other);
+  RPN &operator=(const RPN &other);
+  int calculate_result(std::string);
 };
 
 #endif

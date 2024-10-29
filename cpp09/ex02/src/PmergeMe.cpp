@@ -8,7 +8,25 @@ PmergeMe::~PmergeMe(void)
 {
 }
 
-int is_sorted(const std::vector<int>& v)
+PmergeMe::PmergeMe(const PmergeMe &other)
+{
+    *this = other;
+}
+
+PmergeMe &PmergeMe::operator=(const PmergeMe &other)
+{
+    if (this != &other)
+    {
+        this->args = other.args;
+        this->vector_sorted = other.vector_sorted;
+        this->vector_duration = other.vector_duration;
+        this->list_sorted = other.list_sorted;
+        this->list_duration = other.list_duration;
+    }
+    return *this;
+}
+
+int is_sorted(const std::vector<int> &v)
 {
     for (size_t i = 0; i < v.size() - 1; i++)
     {
@@ -18,7 +36,7 @@ int is_sorted(const std::vector<int>& v)
     return 1;
 }
 
-int only_digit(const char* str)
+int only_digit(const char *str)
 {
     while (*str)
     {
@@ -29,7 +47,7 @@ int only_digit(const char* str)
     return 1;
 }
 
-int PmergeMe::parse_args(char** av)
+int PmergeMe::parse_args(char **av)
 {
     int i = 0;
     while (av[i])
@@ -45,7 +63,7 @@ int PmergeMe::parse_args(char** av)
             std::cout << "Error: " << av[i] << " number is too long." << std::endl;
             return 1;
         }
-        
+
         this->args.push_back(static_cast<int>(num));
         i++;
     }
@@ -70,7 +88,7 @@ int PmergeMe::merge_vector()
         return 1;
     }
 
-    std::vector<std::pair<int, int> > pairs;
+    std::vector<std::pair<int, int>> pairs;
     for (size_t i = 0; i < this->args.size(); i += 2)
     {
         if (i + 1 < this->args.size())
@@ -79,17 +97,18 @@ int PmergeMe::merge_vector()
                 pairs.push_back(std::make_pair(this->args[i + 1], this->args[i]));
             else
                 pairs.push_back(std::make_pair(this->args[i], this->args[i + 1]));
-        } else
+        }
+        else
             pairs.push_back(std::make_pair(-1, this->args[i]));
     }
 
     std::vector<int> mins;
-    for (std::vector<std::pair<int, int> >::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
+    for (std::vector<std::pair<int, int>>::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
         mins.push_back(it->first);
     std::sort(mins.begin(), mins.end());
 
     std::vector<int> sorted = mins;
-    for (std::vector<std::pair<int, int> >::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
+    for (std::vector<std::pair<int, int>>::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
     {
         std::vector<int>::iterator pos = std::lower_bound(sorted.begin(), sorted.end(), it->second);
         sorted.insert(pos, it->second);
@@ -101,7 +120,6 @@ int PmergeMe::merge_vector()
     this->vector_duration = duration;
     return 0;
 }
-
 
 int PmergeMe::merge_list()
 {
@@ -122,7 +140,7 @@ int PmergeMe::merge_list()
         return 1;
     }
 
-    std::list<std::pair<int, int> > pairs;
+    std::list<std::pair<int, int>> pairs;
     for (size_t i = 0; i < this->args.size(); i += 2)
     {
         if (i + 1 < this->args.size())
@@ -131,18 +149,19 @@ int PmergeMe::merge_list()
                 pairs.push_back(std::make_pair(this->args[i + 1], this->args[i]));
             else
                 pairs.push_back(std::make_pair(this->args[i], this->args[i + 1]));
-        } else
+        }
+        else
             pairs.push_back(std::make_pair(-1, this->args[i]));
     }
 
     std::list<int> mins;
-    for (std::list<std::pair<int, int> >::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
+    for (std::list<std::pair<int, int>>::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
         mins.push_back(it->first);
 
     mins.sort();
 
     std::list<int> sorted_list = mins;
-    for (std::list<std::pair<int, int> >::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
+    for (std::list<std::pair<int, int>>::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
     {
         std::list<int>::iterator pos = sorted_list.begin();
         for (; pos != sorted_list.end(); ++pos)
@@ -159,7 +178,6 @@ int PmergeMe::merge_list()
     this->list_duration = duration;
     return 0;
 }
-
 
 void PmergeMe::display()
 {
