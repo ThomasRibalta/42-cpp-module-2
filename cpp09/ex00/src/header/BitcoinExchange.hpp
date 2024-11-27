@@ -6,6 +6,12 @@
 #include <fstream>
 #include <climits>
 #include <cstdlib>
+#include <algorithm>
+#include <cctype>
+#include <ctime>
+#include <vector>
+#include <list>
+#include <cfloat>
 
 class BitcoinExchange
 {
