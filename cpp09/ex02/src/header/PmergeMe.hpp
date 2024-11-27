@@ -9,6 +9,7 @@
 #include <list>
 #include <cctype>
 #include <cstdlib>
+#include <climits>
 
 class PmergeMe
 {

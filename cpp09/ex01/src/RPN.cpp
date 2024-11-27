@@ -27,7 +27,7 @@ int RPN::calculate_result(std::string expression)
     {
         if (isdigit(token[0]))
         {
-            this->_stack.push(std::stoi(token));
+            this->_stack.push(std::atoi(token.c_str()));
         }
         else
         {

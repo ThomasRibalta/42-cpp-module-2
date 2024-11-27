@@ -61,7 +61,7 @@ float BitcoinExchange::get_value_prev(std::string date)
 
 void BitcoinExchange::compare_data(std::string filename)
 {
-  std::ifstream file(filename);
+  std::ifstream file(filename.c_str());
 
   if (file.is_open())
   {

@@ -5,6 +5,7 @@
 #include <stack>
 #include <sstream>
 #include <stdexcept>
+#include <cstdlib>
 
 class RPN
 {

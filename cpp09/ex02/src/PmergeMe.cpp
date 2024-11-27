@@ -88,7 +88,7 @@ int PmergeMe::merge_vector()
         return 1;
     }
 
-    std::vector<std::pair<int, int>> pairs;
+    std::vector<std::pair<int, int> > pairs;
     for (size_t i = 0; i < this->args.size(); i += 2)
     {
         if (i + 1 < this->args.size())
@@ -103,12 +103,12 @@ int PmergeMe::merge_vector()
     }
 
     std::vector<int> mins;
-    for (std::vector<std::pair<int, int>>::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
+    for (std::vector<std::pair<int, int> >::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
         mins.push_back(it->first);
     std::sort(mins.begin(), mins.end());
 
     std::vector<int> sorted = mins;
-    for (std::vector<std::pair<int, int>>::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
+    for (std::vector<std::pair<int, int> >::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
     {
         std::vector<int>::iterator pos = std::lower_bound(sorted.begin(), sorted.end(), it->second);
         sorted.insert(pos, it->second);
@@ -140,7 +140,7 @@ int PmergeMe::merge_list()
         return 1;
     }
 
-    std::list<std::pair<int, int>> pairs;
+    std::list<std::pair<int, int> > pairs;
     for (size_t i = 0; i < this->args.size(); i += 2)
     {
         if (i + 1 < this->args.size())
@@ -155,13 +155,13 @@ int PmergeMe::merge_list()
     }
 
     std::list<int> mins;
-    for (std::list<std::pair<int, int>>::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
+    for (std::list<std::pair<int, int> >::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
         mins.push_back(it->first);
 
     mins.sort();
 
     std::list<int> sorted_list = mins;
-    for (std::list<std::pair<int, int>>::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
+    for (std::list<std::pair<int, int> >::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
     {
         std::list<int>::iterator pos = sorted_list.begin();
         for (; pos != sorted_list.end(); ++pos)
