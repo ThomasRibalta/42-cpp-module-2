@@ -1,6 +1,5 @@
 #include "header/BitcoinExchange.hpp"
 #include <fstream>
-#include <boost/regex.hpp>
 
 BitcoinExchange::BitcoinExchange(void)
 {
